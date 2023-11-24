@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+      <style>
+        .box-part {
+          border: 1px solid;
+          height: 200px;
+          width: 400px;
+        }
+        .timer-box {
+          border: 1px solid;
+          height: 50px;
+          width: 50px;
+          font-size: 25px;
+        }
+        .timer-box{
+            margin: auto;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+       
+      </style>
+      <body> 
+        <div class="">
+          <div class="box-part">
+            <div class="timer-box"></div>
+            <div class="question_part">
+              <div class="qusetion_series"></div>
+              <div class="option_series">
+                <input type="radio" id="inp1" value="inp1" name="radiobt" class="rate"/>
+                <label for="inp1" class="labaling"></label>`
+
+                <input type="radio" id="inp2" value="inp2" name="radiobt" class="rate"/>
+                <label for="inp2" class="labaling"></label>
+
+                <input type="radio" id="inp3" value="inp3" name="radiobt" class="rate"/>
+                <label for="inp3" class="labaling"></label>
+
+                <input type="radio" id="inp4" value="inp4" name="radiobt" class="rate"/>
+                <label for="inp4" class="labaling"></label>
+              </div>
+            </div>
+          </div>
+          <button class="quiz_strt">Start Quiz</button>
+        </div>
+        <script>
+          let questions = [
+            {
+              q: "5+5",
+              a: 10,
+              option: [6, 2, 10, 15],
+            },
+            {
+              q: "10+5",
+              a: 15,
+              option: [5, 1, 10, 15],
+            },
+            {
+              q: "25-5",
+              a: 15,
+              option: [25, 11, 0, 20],
+            },
+            {
+              q: "35+5",
+              a: 40,
+              option: [40, 11, 20, 30],
+            },
+          ];
+
+          let a = 3;
+          let i = 0;
+          let questionseries = document.querySelector(".qusetion_series");
+          let optionseries = document.querySelectorAll(".option_series");
+          let inptpart = document.querySelector(".rate")
+          let labelpart = document.querySelectorAll(".labaling")
+          let quizbtn = document.querySelector(".quiz_strt");
+          let timerbox = document.querySelector(".timer-box");
+
+          quizbtn.addEventListener("click", () => {
+            let intvl = setInterval(() => {
+              timerbox.innerHTML = a;
+              if (a <= 0) {
+                clearInterval(intvl);
+                questionfun();
+              }
+              a--;
+            }, 1000);
+          });
+
+          function questionfun() {
+            console.log("rajat");
+            let quesvl = setInterval(() => {
+                
+            optionfun();
+              questionseries.innerHTML = questions[i].q;
+              i++;
+              if (i == 4) {
+                clearInterval(quesvl);
+              }
+            }, 2000);
+          }
+
+          function optionfun(){
+            for(let j = 0; j< 4; j++){
+                labelpart[j].innerHTML = questions[i].option[j];
+            }
+          }
+        </script>
+      </body>
+    </html>
+</html>

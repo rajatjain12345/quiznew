@@ -12,28 +12,36 @@
           height: 200px;
           width: 400px;
           position: relative;
+          display: none;
         }
         .timer-box {
           border: 1px solid;
           height: 50px;
           width: 50px;
           font-size: 25px;
+          display: none;
         }
         .timer-box{
-            margin: auto;
+            /* margin: auto; */
             margin-bottom: 30px;
             text-align: center;
         }
         .boxcolor{
           position: absolute;
           bottom: 30px;
+          display: none;
         }
+        .option_series{
+          display: none;
+        }
+
        
       </style>
       <body> 
         <div class="">
+          <div class="timer-box"></div>
           <div class="box-part">
-            <div class="timer-box"></div>
+            
             <div class="question_part">
               <div class="qusetion_series"></div>
               <div class="option_series">
@@ -85,9 +93,9 @@
           ];
 
           let a = 3;
-          let i = 0;
+          let i = 1;
           let questionseries = document.querySelector(".qusetion_series");
-          let optionseries = document.querySelectorAll(".option_series");
+          let optionseries = document.querySelector(".option_series");
           let inptpart = document.querySelectorAll(".rate")
           let labelpart = document.querySelectorAll(".labaling")
           let quizbtn = document.querySelector(".quiz_strt");
@@ -95,9 +103,14 @@
           let boxbtn = document.querySelectorAll(".box_btn")
 
           quizbtn.addEventListener("click", () => {
+            timerbox.style.display = "block"
+            quizbtn.style.display= "none"
             let intvl = setInterval(() => {
               timerbox.innerHTML = a;
               if (a <= 0) {
+                timerbox.style.display = "none"
+                document.querySelector(".boxcolor").style.display = "block"
+                document.querySelector(".box-part").style.display = "block"               
                 clearInterval(intvl);
                 questionfun();
               }
@@ -107,9 +120,16 @@
 
           function questionfun() {
             console.log("rajat");
+            questionseries.innerHTML = questions[0].q;
+            for(let j = 0; j< 4; j++){
+              optionseries.style.display = "block"
+                labelpart[j].innerHTML = questions[0].option[j];
+                selectopt();
+            }
+
             let quesvl = setInterval(() => {
-            optionfun();
               questionseries.innerHTML = questions[i].q;
+              optionfun();
               i++;
               if (i == 4) {
                 clearInterval(quesvl);
@@ -118,6 +138,7 @@
           }
 
           function optionfun(){
+            optionseries.style.display = "block"
             for(let j = 0; j< 4; j++){
                 labelpart[j].innerHTML = questions[i].option[j];
             }
@@ -128,8 +149,8 @@
             for(let k = 0; k<4; k++){
               if(inptpart[k].checked){
                 let store = (labelpart[k]).innerHTML;
-                console.log((store))
-                console.log((questions[i].a))
+                console.log((`store: ${store}`))
+                console.log((`answer: ${questions[i].a}`));
                 ///for colorbox
                 if(Number(store) == Number(questions[i].a)){
                   console.log("right")
@@ -140,11 +161,9 @@
                   boxbtn[i].style.backgroundColor = "red"
                   boxbtn[i].style.color = "white"
                 }
-             
+                inptpart[k].checked = false; 
               }
-              inptpart[k].checked = false;
             }
-            
           }
 
         </script>

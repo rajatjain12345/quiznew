@@ -6,10 +6,12 @@
     <title>Document</title>
   </head>
       <style>
+
         .box-part {
           border: 1px solid;
           height: 200px;
           width: 400px;
+          position: relative;
         }
         .timer-box {
           border: 1px solid;
@@ -22,6 +24,10 @@
             margin-bottom: 30px;
             text-align: center;
         }
+        .boxcolor{
+          position: absolute;
+          bottom: 30px;
+        }
        
       </style>
       <body> 
@@ -31,23 +37,30 @@
             <div class="question_part">
               <div class="qusetion_series"></div>
               <div class="option_series">
-                <input type="radio" id="inp1" value="inp1" name="radiobt" class="rate"/>
-                <label for="inp1" class="labaling"></label>`
+                <input type="radio" id="inp1"  name="radiobt" class="rate"/>
+                <label for="inp1" class="labaling"></label>
 
-                <input type="radio" id="inp2" value="inp2" name="radiobt" class="rate"/>
+                <input type="radio" id="inp2"  name="radiobt" class="rate"/>
                 <label for="inp2" class="labaling"></label>
 
-                <input type="radio" id="inp3" value="inp3" name="radiobt" class="rate"/>
+                <input type="radio" id="inp3"  name="radiobt" class="rate"/>
                 <label for="inp3" class="labaling"></label>
 
-                <input type="radio" id="inp4" value="inp4" name="radiobt" class="rate"/>
+                <input type="radio" id="inp4"  name="radiobt" class="rate"/>
                 <label for="inp4" class="labaling"></label>
+              </div>
+              <div class="boxcolor">
+                <button class="box_btn">First</button>
+                <button class="box_btn">Second</button>
+                <button class="box_btn">Third</button>
+                <button class="box_btn">Fourth</button>
               </div>
             </div>
           </div>
           <button class="quiz_strt">Start Quiz</button>
         </div>
         <script>
+
           let questions = [
             {
               q: "5+5",
@@ -61,7 +74,7 @@
             },
             {
               q: "25-5",
-              a: 15,
+              a: 20,
               option: [25, 11, 0, 20],
             },
             {
@@ -75,10 +88,11 @@
           let i = 0;
           let questionseries = document.querySelector(".qusetion_series");
           let optionseries = document.querySelectorAll(".option_series");
-          let inptpart = document.querySelector(".rate")
+          let inptpart = document.querySelectorAll(".rate")
           let labelpart = document.querySelectorAll(".labaling")
           let quizbtn = document.querySelector(".quiz_strt");
           let timerbox = document.querySelector(".timer-box");
+          let boxbtn = document.querySelectorAll(".box_btn")
 
           quizbtn.addEventListener("click", () => {
             let intvl = setInterval(() => {
@@ -94,21 +108,45 @@
           function questionfun() {
             console.log("rajat");
             let quesvl = setInterval(() => {
-                
             optionfun();
               questionseries.innerHTML = questions[i].q;
               i++;
               if (i == 4) {
                 clearInterval(quesvl);
               }
-            }, 2000);
+            }, 4000);
           }
 
           function optionfun(){
             for(let j = 0; j< 4; j++){
                 labelpart[j].innerHTML = questions[i].option[j];
             }
+            selectopt();
           }
+
+          function selectopt(){
+            for(let k = 0; k<4; k++){
+              if(inptpart[k].checked){
+                let store = (labelpart[k]).innerHTML;
+                console.log((store))
+                console.log((questions[i].a))
+                ///for colorbox
+                if(Number(store) == Number(questions[i].a)){
+                  console.log("right")
+                  boxbtn[i].style.backgroundColor = "green"
+                  boxbtn[i].style.color = "white"
+                }else{
+                  console.log("wrong")
+                  boxbtn[i].style.backgroundColor = "red"
+                  boxbtn[i].style.color = "white"
+                }
+             
+              }
+              inptpart[k].checked = false;
+            }
+            
+          }
+
         </script>
       </body>
     </html>

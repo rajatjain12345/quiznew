@@ -127,11 +127,11 @@
             }
 
             let quesvl = setInterval(() => {
-              if(i>=0){
-                selectopt()
-              }
               questionseries.innerHTML = questions[i].q;
               optionfun();
+              if(i > 0){
+                selectopt()
+              }
               i++;
               if (i == 4) {
                 selectopt();
@@ -153,7 +153,7 @@
               if(inptpart[k].checked){
                 let store = (labelpart[k]).innerHTML;
                 console.log((`store: ${store}`))
-                console.log((`answer: ${questions[i].a}`));
+                // console.log((`answer: ${questions[i].a}`));
                 ///for colorbox
                 if(Number(store) == Number(questions[i].a)){
                   // console.log("right")
@@ -168,7 +168,6 @@
               }
             }
           }
-
         </script>
       </body>
     </html>

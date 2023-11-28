@@ -6,7 +6,6 @@
     <title>Document</title>
   </head>
       <style>
-
         .box-part {
           border: 1px solid;
           height: 200px;
@@ -119,7 +118,7 @@
           });
 
           function questionfun() {
-            console.log("rajat");
+            // console.log("rajat");
             questionseries.innerHTML = questions[0].q;
             for(let j = 0; j< 4; j++){
               optionseries.style.display = "block"
@@ -128,10 +127,14 @@
             }
 
             let quesvl = setInterval(() => {
+              if(i>=0){
+                selectopt()
+              }
               questionseries.innerHTML = questions[i].q;
               optionfun();
               i++;
               if (i == 4) {
+                selectopt();
                 clearInterval(quesvl);
               }
             }, 4000);
@@ -153,11 +156,11 @@
                 console.log((`answer: ${questions[i].a}`));
                 ///for colorbox
                 if(Number(store) == Number(questions[i].a)){
-                  console.log("right")
+                  // console.log("right")
                   boxbtn[i].style.backgroundColor = "green"
                   boxbtn[i].style.color = "white"
                 }else{
-                  console.log("wrong")
+                  // console.log("wrong")
                   boxbtn[i].style.backgroundColor = "red"
                   boxbtn[i].style.color = "white"
                 }
